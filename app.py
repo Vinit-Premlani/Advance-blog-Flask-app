@@ -13,10 +13,11 @@ from datetime import datetime
 # Import your forms from the forms.py
 from forms import CreatePostForm,RegisterForm,LoginForm,CommentForm
 import os
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+csrf = CSRFProtect(app)
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
