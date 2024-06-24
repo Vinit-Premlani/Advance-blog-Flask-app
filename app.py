@@ -15,8 +15,7 @@ from forms import CreatePostForm,RegisterForm,LoginForm,CommentForm
 import os
 
 app = Flask(__name__)
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -315,3 +314,5 @@ def contact():
     return render_template("contact.html",current_user=current_user)
 
 
+if __name__ == "__main__":
+    app.run(debug=False)
